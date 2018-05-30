@@ -1,5 +1,4 @@
 let gulp = require('gulp');
-let browserSync = require('browser-sync');
 let uglify = require('gulp-uglify');
 let concat = require('gulp-concat');
 let rename = require('gulp-rename');
