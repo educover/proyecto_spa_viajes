@@ -1,0 +1,21 @@
+{
+  "name": "proyecto-spa-viajes",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Edu Alcover <alcover.edu@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/educover/proyecto_spa_viajes",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.1.1"
+  }
+}
