@@ -8,8 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/quienessomos', function(req, res, next){
   res.render('quienessomos', {
-    nombre:'Eduardo Alcover',
-    layout:'layout.hbs'
+    nombre:'Eduardo Alcover'
   });
 })
 
