@@ -1,8 +1,4 @@
-h5 {
-    color:blue;
-}
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -12,4 +8,13 @@ a {
 
 h1 {
   color:black;
+}
+
+.image{
+  background: url("/img/nathan-anderson-316188-unsplash.jpg") no-repeat center top;
+  background-position:center center;
+  text-align:center;
+  min-height: 400px;
+  width:100%;
+  background-size:cover;
 }

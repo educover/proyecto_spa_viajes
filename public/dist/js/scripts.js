@@ -1,13 +1,12 @@
-console.log('a ver si funciona');
 
-function prim(){
-    console.log('pacaa')
+
+var holaMundo = function () {
+    alert('HolaMundo');
 }
 
-console.log('holaaaa')
-console.log('HolaMundo')
-
-console.log('aaaaaaaaaaaaa')
-function hola(){
-    console.log('holaMundo')
+var miEvent = function () {
+$('.miBoton').on('click', holaMundo);
 }
+
+
+$(document).ready(miEvent);
