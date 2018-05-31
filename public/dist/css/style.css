@@ -1,20 +1,61 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
-}
 
-h1 {
-  color:black;
-}
 
 .image{
   background: url("/img/nathan-anderson-316188-unsplash.jpg") no-repeat center top;
   background-position:center center;
   text-align:center;
-  min-height: 400px;
+  min-height: 500px;
+  width:100%;
+  background-size:cover;
+  padding-top:5px;
+}
+
+.logo{
+  padding-top: 1.5em;
+  max-width: 135px;
+}
+
+
+a{
+  color:white;
+}
+
+.icons{
+  max-width: 20px;
+  margin:4px;
+}
+
+.text-left{
+  color:white;
+  font-size:2em;
+}
+
+.footer{
+  max-height: 400px;
+  background-color:#140A35  ;
+  color:white;
+}
+
+.footer2{
+min-height: 50px;
+border-top: black solid 2px;
+}
+
+/*fotos viajes */
+.destinos{
+  min-height: 500px;
+}
+
+.imagindex{
+  max-width: 200px;
+}
+
+.quienessomos{
+  background: url("/img/travel_1.jpg") no-repeat center top;
+  background-position:center center;
+  text-align:center;
+  min-height: 500px;
   width:100%;
   background-size:cover;
 }
