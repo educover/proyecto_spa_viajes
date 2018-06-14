@@ -3,11 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var flash = require('connect-flash');
 
 var hbs=require('hbs');
 var hbsUtils = require('hbs-utils')(hbs);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
+var registroRouter = require('./routes/registro');
+var loginFlash = require('./routes/login-flash');
+
+var ExpressSession = require('express-session');
 
 var app = express();
 
@@ -19,6 +25,14 @@ hbsUtils.registerWatchedPartials(`${__dirname}/views/partials`);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+app.use(ExpressSession({
+  secret:'GeekshubsAcademy',
+  name:'SesionGeek',
+  resave:true,
+  saveUninitialized:true
+}));
+
+app.use(flash());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,10 +40,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('./bower_components',express.static(path.join(`${__dirname}public/components`)));
+app.use('./bower_components',express.static(path.join(`${__dirname}/public/components`)));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/login', loginRouter);
+app.use('/login-flash', loginFlash);
+app.use('/registro', registroRouter);
+
+
 
 
 
