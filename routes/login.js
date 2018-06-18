@@ -15,4 +15,10 @@ router.post('/', (req, res, next)=>{
     loginController.login();
 })
 
+router.post('/recuperar', (req, res, next)=>{
+    let loginController = new LoginController(req, res, next);
+    loginController.recoverPass();
+    res.redirect('/login')
+})
+
 module.exports = router;

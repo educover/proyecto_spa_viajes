@@ -6,7 +6,13 @@ class registroController extends controller{
         super(req, res, next);
     }
     index(){
-            this.res.render('registro', {title: 'Registro', layout:'layoutLogin'});
+        let info = this.req.flash('info');
+        if(info==''){
+            this.res.render('registro', {title:'Registro', layout:'layoutLogin'})
+        } else {
+        this.res.render('registro', {title: 'Registro', layout:'layoutLogin', info:info});
+        info='';
+        }
     }
 
     registro(){
@@ -15,12 +21,37 @@ class registroController extends controller{
         let pass = this.req.body.pass1;
         
         let userModel = new UserModel();
-        userModel.registroUser(username, email, pass, (info)=>{
-            console.log('Datos insertados'+ info);
-        });
-        this.res.redirect('/login');
-    }
+        userModel.findUser(username, (info)=>{
+            if(typeof(info[0])!=='undefined'){
+                if(info[0].username==username){
+                console.log('usuario repetido');
+                this.req.flash('info', 'El nombre de usuario esta utilizado');
+                this.index();
+                return;
+            }
+        }
+    });
+   
+        userModel.findMail(email, (info)=>{ 
+            if(typeof(info[0])!=='undefined'){      
+            if(info[0].email==email){
+                console.log('email repetido');
+                this.req.flash('info', 'El email esta utilizado');
+                this.index();
+                return;
+            }    
+        }
+    });
     
+       userModel.registroUser(username, pass, email, (info)=>{
+            if(typeof(info)==='object'){
+                console.log('Usuario insertado correctamente')
+                this.res.redirect('/login');
+            } 
+       });
+  
+   
+    }
 }
 
 module.exports = registroController;

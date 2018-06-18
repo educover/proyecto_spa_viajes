@@ -119,6 +119,11 @@ form p{
 .login{
   background: url("/img/nathan-anderson-316188-unsplash.jpg") no-repeat center top;
 }
+form a{
+  color:white;
+}
+
+/*ESTILOS REGISTRO*/
 
 
 /*-------------------*/
