@@ -8,7 +8,7 @@ gulp.task('scripts', ()=>{
     return gulp.src('public/javascripts/**/*.js')
     .pipe(concat('scripts.js'))
     .pipe(gulp.dest('public/dist/js'))
-    .pipe(rename('script.min.js'))
+    .pipe(rename('scripts.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('public/dist/js'))
 });

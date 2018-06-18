@@ -1,6 +1,10 @@
 var controller = require('./controller');
 const UserModel = require('../models/users');
 
+const Email = require('../configuration/emailConfig');
+const HbsEmail = require('nodemailer-express-handlebars');
+const Path = require('path');
+
 
 class loginController extends controller{
     constructor(req, res, next){
@@ -20,9 +24,9 @@ class loginController extends controller{
             if(pass==info[0].password){
                 //miFunc(username, pass)
                 
-                
+                this.res.render('login', {title: 'Login', layout:'layoutLogin', nombre:info[0].username});
 
-                this.index();
+               // this.index();
             }else{
                 this.req.flash('info', 'El pass es incorrecto');
                 this.index();
@@ -50,10 +54,40 @@ class loginController extends controller{
         let email = this.req.body.email;
         let userModel = new UserModel();
         userModel.findMail(email, (info)=>{
-            if(typeof(info)==='object'){
+            if(info.length!==0){
                 console.log('usuario'+info[0].username + ' contraseña: '+info[0].password)
             }
+            Email.transporter.use('compile', HbsEmail({
+                viewEngine: 'hbs',
+                extName:'.hbs',
+                viewPath: Path.join(__dirname, '../views/emails')
+            }))
+            let message = {
+                to: info[0].email,
+                subject: 'Recuperacion login',
+                template:'email',
+                context:{
+                    text:'Usuario: ' + info[0].username + ' Contraseña: '+info[0].password
+                },
+                /*attachments:[
+                    {
+                        filename:'super.jpeg',
+                        path:__dirname+'/../public/images',
+                        cid:'imagen'
+                    }
+                ]*/
+            };
+            Email.transporter.sendMail(message, (error, info)=>{
+            if(error) {
+                //console.log(error);
+                res.status(500).send(error, message);
+                return
+            }
+                Email.transporter.close();
+                
+            });
         })
+        res.redirect('/login');
     }
 }
 

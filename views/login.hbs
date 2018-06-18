@@ -18,6 +18,11 @@
 {{#if info}}
 <div><h1>ERROR{{info}}</h1></div>
 {{/if}}
+<div class="userCorrecto">
+{{#if nombre}}
+<input value="{{nombre}}"></input>
+{{/if}}
+</div>
 </div>
   <div class="row">
     <div class="col-12">
@@ -27,7 +32,7 @@
      <div class="modal fade" id="recuperarContraseña" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                <div class="modal-dialog" role="document">
                    <div class="modal-content">
-                       <form action="/login/recuperar" method="post">
+                       <form action="/login/email" method="post">
                            <div class="modal-header">
                                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-unlock-alt"></i> Recuperar Contraseña</h5>
                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">

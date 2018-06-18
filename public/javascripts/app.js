@@ -9,8 +9,8 @@
     var validation = Array.prototype.filter.call(forms, function(form) {
         
       form.addEventListener('submit', function(event) {
-        let pass1 = $('.pass1').val();
-        let pass2 = $('.pass2').val();
+        var pass1 = $('.pass1').val();
+        var pass2 = $('.pass2').val();
         
         if (form.checkValidity() === false) {
           event.preventDefault();
@@ -28,14 +28,18 @@
   }, false);
 })();
 
-/*
-let miFunc=(username, pass)=>{
-let obj= JSON.stringify({
-  nombre:username,
-  contraseña: pass
-});
+var miFunc = function(){
+  var texto = $('.userCorrecto input').val();
+  console.log('usuario ->' + texto);
+  if(texto===''){
+    return;
+  } else if(typeof(texto)==='undefined'){
+    return;
+  }else{
+  localStorage.setItem('Usuario', texto);
+  }
+};
 
-localStorage.setItem('Usuario', obj);
-}
+$('.userCorrecto').change(miFunc());
 
-module.exports = miFunc;*/
+

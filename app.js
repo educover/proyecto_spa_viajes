@@ -15,6 +15,11 @@ var loginFlash = require('./routes/login-flash');
 
 var ExpressSession = require('express-session');
 
+const Logger = require('./configuration/Winston');
+const winston = require('winston');
+const hbsemail = require('nodemailer-express-handlebars');
+
+
 var app = express();
 
 //view engine partials
@@ -34,13 +39,14 @@ app.use(ExpressSession({
 
 app.use(flash());
 
-app.use(logger('dev'));
+//app.use(logger('dev'));
+app.use(logger('combined', {stream: winston.stream}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('./bower_components',express.static(path.join(`${__dirname}/public/components`)));
+app.use('components',express.static(path.join(`${__dirname}/public/components`)));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -54,7 +60,9 @@ app.use('/registro', registroRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  //next(createError(404));
+  app.use('/error', res.render('notfound', {title:'Error', layout:'layoutLogin'}));
+  
 });
 
 // error handler

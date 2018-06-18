@@ -122,6 +122,9 @@ form p{
 form a{
   color:white;
 }
+.userCorrecto{
+  display:none;
+}
 
 /*ESTILOS REGISTRO*/
 
