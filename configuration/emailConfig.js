@@ -7,7 +7,7 @@ let mailer={};
         tls:{ rejectUnauthorized: false},
         auth :{
             user:'alcover.edu@gmail.com',
-            pass:'670951536Edu.'
+            pass:''
         },
        
     },{

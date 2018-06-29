@@ -5,21 +5,27 @@ var LoginController = require('../controllers/loginController');
 
 
 router.get('/', (req, res, next)=>{
+    if(req.session.user) {
+        res.redirect('/');
+        return;
+    }else {
     let loginController = new LoginController(req, res, next);
 
     //console.log(userModel.getAll());
     loginController.index();
+    }
 });
 
 router.post('/', (req, res, next)=>{
+
     let loginController = new LoginController(req, res, next);
     loginController.login();
 })
 
 router.post('/email', (req, res, next)=>{
     let loginController = new LoginController(req, res, next);
-    loginController.recoverPass();
-    //res.redirect('/login')
+    loginController.sendEmail();
+    res.redirect('/login')
 })
 
 /*router.get('/email', (req, res, next)=>{

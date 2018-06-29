@@ -12,6 +12,12 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registroRouter = require('./routes/registro');
 var loginFlash = require('./routes/login-flash');
+var regenerationRouter = require('./routes/regeneration');
+var activateRouter = require('./routes/activate');
+var cambioRouter = require('./routes/cambio');
+var closeSessionRouter = require('./routes/closeSession');
+var adminRouter = require('./routes/admin');
+
 
 var ExpressSession = require('express-session');
 
@@ -39,8 +45,8 @@ app.use(ExpressSession({
 
 app.use(flash());
 
-//app.use(logger('dev'));
-app.use(logger('combined', {stream: winston.stream}));
+app.use(logger('dev'));
+//app.use(logger('combined', {stream: winston.stream}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -53,16 +59,16 @@ app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/login-flash', loginFlash);
 app.use('/registro', registroRouter);
-
-
-
-
+app.use('/regeneration', regenerationRouter);
+app.use('/activate', activateRouter);
+app.use('/cambio', cambioRouter);
+app.use('/closeSession', closeSessionRouter)
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  //next(createError(404));
-  app.use('/error', res.render('notfound', {title:'Error', layout:'layoutLogin'}));
-  
+ // next(createError(404));
+  res.render('notfound');
 });
 
 // error handler
@@ -75,7 +81,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = app;

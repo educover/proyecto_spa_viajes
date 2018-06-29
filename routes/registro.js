@@ -13,6 +13,8 @@ router.get('/', (req, res, next)=>{
 router.post('/', (req, res, next)=>{
     let registroController = new RegistroController(req, res, next);
     registroController.registro();
+    //res.redirect('/registro');
+    res.redirect('/registro');
 })
 
 module.exports = router;

@@ -1,3 +1,17 @@
+.botAdmin{
+    text-align: center;
+}
+
+.divAdmin{
+    background: rgba(40,69,123,1);
+background: -moz-linear-gradient(left, rgba(40,69,123,1) 0%, rgba(35,57,108,0.82) 33%, rgba(35,57,108,0.69) 57%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(40,69,123,1)), color-stop(33%, rgba(35,57,108,0.82)), color-stop(57%, rgba(35,57,108,0.69)));
+background: -webkit-linear-gradient(left, rgba(40,69,123,1) 0%, rgba(35,57,108,0.82) 33%, rgba(35,57,108,0.69) 57%);
+background: -o-linear-gradient(left, rgba(40,69,123,1) 0%, rgba(35,57,108,0.82) 33%, rgba(35,57,108,0.69) 57%);
+background: -ms-linear-gradient(left, rgba(40,69,123,1) 0%, rgba(35,57,108,0.82) 33%, rgba(35,57,108,0.69) 57%);
+background: linear-gradient(to right, rgba(40,69,123,1) 0%, rgba(35,57,108,0.82) 33%, rgba(35,57,108,0.69) 57%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28457b', endColorstr='#23396c', GradientType=1 );
+}
 
 
 /* ESTILOS DEL HEADER*/

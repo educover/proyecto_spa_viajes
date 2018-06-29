@@ -1,10 +1,7 @@
 var controller = require('./controller');
 const UserModel = require('../models/users');
-
-const Email = require('../configuration/emailConfig');
-const HbsEmail = require('nodemailer-express-handlebars');
-const Path = require('path');
-
+let IdentificationService = require('../service/identificationService');
+var SecureService = require('../service/secureService');
 
 class loginController extends controller{
     constructor(req, res, next){
@@ -12,7 +9,7 @@ class loginController extends controller{
     }
     login(){
         let username = this.req.body.user;
-        let pass = this.req.body.pass;
+        let pass1 = this.req.body.pass;
         let userModel = new UserModel();
         userModel.findUser(username, (info)=>{
             if(info.length===0){
@@ -21,12 +18,21 @@ class loginController extends controller{
             this.index();
             
             } else {
-            if(pass==info[0].password){
-                //miFunc(username, pass)
-                
-                this.res.render('login', {title: 'Login', layout:'layoutLogin', nombre:info[0].username});
-
+                //let secureService = new SecureService();
+                //let pass =  secureService
+                let secureService = new SecureService();
+                let bool = secureService.comparePass(pass1, info[0].password);
+            if(bool){
+                userModel.isActive(username, (info2)=>{
+                   if(info2[0].active===1){
+                       this.req.session.user = username;
+                    this.res.render('index', {title: 'Pagina Principal', layout:'layout', usuario:username});
+                   } else{
+                        this.req.flash('info', 'Usuario no activo');
+                        this.index();
+                   }
                // this.index();
+            })
             }else{
                 this.req.flash('info', 'El pass es incorrecto');
                 this.index();
@@ -50,44 +56,56 @@ class loginController extends controller{
         
     }
 
-    recoverPass(){
+    sendEmail(){
         let email = this.req.body.email;
         let userModel = new UserModel();
         userModel.findMail(email, (info)=>{
             if(info.length!==0){
-                console.log('usuario'+info[0].username + ' contraseña: '+info[0].password)
+                console.log('usuario'+info[0].username + ' contraseña: '+info[0].password);
+                let identificationService = new IdentificationService();
+                let hash = identificationService.getUUIDD(1, 2);
+                    console.log(hash);
+                userModel.saveHash(hash,info[0].email, (info)=>{
+                    console.log(info);
+                });
+                let template = 'email';
+                userModel.envioMail(info[0].email, hash, template);
+                this.req.session.user = info[0].username;
             }
-            Email.transporter.use('compile', HbsEmail({
-                viewEngine: 'hbs',
-                extName:'.hbs',
-                viewPath: Path.join(__dirname, '../views/emails')
-            }))
-            let message = {
-                to: info[0].email,
-                subject: 'Recuperacion login',
-                template:'email',
-                context:{
-                    text:'Usuario: ' + info[0].username + ' Contraseña: '+info[0].password
-                },
-                /*attachments:[
-                    {
-                        filename:'super.jpeg',
-                        path:__dirname+'/../public/images',
-                        cid:'imagen'
-                    }
-                ]*/
-            };
-            Email.transporter.sendMail(message, (error, info)=>{
-            if(error) {
-                //console.log(error);
-                res.status(500).send(error, message);
-                return
-            }
-                Email.transporter.close();
-                
-            });
+
         })
-        res.redirect('/login');
+        //this.index();
+    }
+
+    compruebaPass(){
+        let user = this.req.session.user;
+        let pass1 = this.req.body.pass1;
+        let userModel = new UserModel();
+        userModel.findUser(user, (info)=>{
+            console.log(info)
+            userModel.eliminaHash(info[0].hash, (info2)=>{
+                console.log(info2);
+            });
+            let secureService = new SecureService();
+            let pass= secureService.encryptPass(pass1);
+            userModel.cambiaPass(pass,user, (info3)=>{
+                console.log(info3)
+                this.res.redirect('/login')
+            })
+        })
+        //this.res.redirect('/login');
+    }
+
+    activaUsuario(hash){
+        let userModel = new UserModel();
+        userModel.activaUser(hash, (info)=>{
+            console.log(info);
+            if(info.length!=0){
+                userModel.eliminaHash(hash, (info2)=>{
+                    console.log(info2);
+                })
+            }
+        })
     }
 }
 

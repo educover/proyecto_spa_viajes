@@ -1,3 +1,4 @@
+
  (function() {
   'use strict';
   window.addEventListener('load', function() {
@@ -17,9 +18,11 @@
           event.stopPropagation();
         }
         if(pass1 !== pass2){
-          $('.container').append('<p>Las contraseñas deben ser iguales</p>');
+
+          $('.container').append('<p>Las contraseñas deben ser iguales, gilipoyas</p>');
           event.preventDefault();
           event.stopPropagation();
+          return;
         }
         
         form.classList.add('was-validated');
@@ -34,6 +37,7 @@ var miFunc = function(){
   if(texto===''){
     return;
   } else if(typeof(texto)==='undefined'){
+    console.log(texto)
     return;
   }else{
   localStorage.setItem('Usuario', texto);

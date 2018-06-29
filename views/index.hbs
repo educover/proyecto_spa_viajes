@@ -1,85 +1,24 @@
 <a name="destinos"></a>
-<div class="dest">
-<div class="card-deck">
-  <div class="card">
-    <img class="card-img-top cards" src="/img/beijing.JPG" alt="Beijing">
-        <div class="card-img-overlay">
-            <div class="row"> 
-                <div class="col-8 texto-izq">Save 90$ pay only$</div>
-                <div class="col-4 texto-der">632$</div>
-            </div>
-        </div>
-    <div class="card-body">
-        <h5 class="card-title">Beijing</h5>
-    </div>
-  </div>
-
-  <div class="card">
-    <img class="card-img-top cards" src="/img/madrid.JPG" alt="Madrid">
-        <div class="card-img-overlay">
-            <div class="row">
-                <div class="col-8 texto-izq">Save 90$ pay only</div>
-                <div class="col-4 texto-der">613$</div>
-            </div>
-        </div>
-    <div class="card-body">
-      <h5 class="card-title">Madrid</h5>
-    </div>
-  </div>
-
+<div class="dest row">
+    
+{{#each travels}}
+<div class="col-4">
+    <div class="card-deck">
     <div class="card">
-        <img class="card-img-top cards" src="/img/ciudad_mexico.JPG" alt="Ciudad de Mexico">
+        <img class="card-img-top cards" src="{{urlfoto}}" alt="Beijing">
             <div class="card-img-overlay">
-                <div class="row">
-                    <div class="col-8 texto-izq">Save 90$ pay only</div>
-                    <div class="col-4 texto-der">585$</div>
+                <div class="row"> 
+                    <div class="col-8 texto-izq">Compra ahora y {{ahorro}}$ menos</div>
+                    <div class="col-4 texto-der">{{price}}$</div>
                 </div>
             </div>
-    <div class="card-body">
-      <h5 class="card-title">Ciudad de Mexico</h5>
+        <div class="card-body">
+            <h5 class="card-title">{{travel}}</h5>
+        </div>
     </div>
-  </div>
-</div>
-
-<div class="card-deck ab">
-    <div class="card">
-        <img class="card-img-top cards" src="/img/new_york.JPG" alt="New York">
-            <div class="card-img-overlay">
-            <div class="row">
-                <div class="col-8 texto-izq">Save 90$ pay only</div>
-                <div class="col-4 texto-der">859$</div>     
-            </div>
-             </div>
-  
-    <div class="card-body">
-      <h5 class="card-title">New York</h5>
     </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top cards" src="/img/tokyo.JPG" alt="Tokyo">
-                   <div class="card-img-overlay">
-        <div class="row">
-            <div class="col-8 texto-izq">Save 90$ pay only</div>
-        <div class="col-4 texto-der">753$</div>
-            </div>
-  </div>
-    <div class="card-body">
-      <h5 class="card-title">Tokyo</h5>
     </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top cards" src="/img/buenos_aires.JPG" alt="Buenos Aires">
-            <div class="card-img-overlay">
-        <div class="row">
-            <div class="col-8 texto-izq">Save 90$ pay only</div>
-        <div class="col-4 texto-der">671$</div>
-            </div>
-  </div>
-    <div class="card-body">
-      <h5 class="card-title">Buenos Aires</h5>
-    </div>
-  </div>
-</div>
+{{/each}}
 </div>
 
 <div id="carouselExampleControls" class="carousel slide carrusel" data-ride="carousel">
@@ -148,6 +87,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
 
 <a name="quienessomos"></a>
 
