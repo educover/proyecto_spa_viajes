@@ -1,7 +1,6 @@
 const email = require('nodemailer');
 
 let mailer={};
-
      mailer.transporter = email.createTransport({
         service: 'gmail',
         tls:{ rejectUnauthorized: false},
@@ -16,6 +15,4 @@ let mailer={};
 
         }
     })
-
-
 module.exports = mailer;

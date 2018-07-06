@@ -1,0 +1,36 @@
+<div class="container-fluid">
+<form class="needs-validation" enctype="multipart/form-data" method="post" role="form" action="anadir/viajes" novalidate>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="validationCustom01">Name Travel</label>
+            <input type="text" class="form-control" id="validationCustom01" name="travel" placeholder="Travel name" required></div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="validationCustom02">Price</label>
+            <input type="text" class="form-control" id="validationCustom02" name="price" placeholder="price €" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="exampleInputPassword1">Ahorro</label>
+            <input type="text" name="ahorro" class="form-control" id="exampleInputPassword1" placeholder="Ahorro" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="exampleInputPassword2">Fotografia</label>         
+            <input type="file" name="file" id="exampleInputPassword2" class="form-control" required>
+        </div>
+             
+   
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">
+                Rellena todos los campos
+            </label>
+            <div class="invalid-feedback">
+                Rellena los campos, cojones
+            </div>
+        </div>
+    </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        
+</form>
+</div>

@@ -14,12 +14,35 @@
                        <a class="nav-link head" href="#quienessomos">Quienes somos</a>
                        <a class="nav-link head" href="#dondeestamos">Donde estamos</a>
                     {{#unless usuario}}
+                    {{#unless admin}}
                         <a class="nav-link head" href="/login">Login</a>
                        <a class="nav-link head" href="/registro">Registro</a>
                     {{/unless}}
+                    {{/unless}}
                     {{#if usuario}}
-                        <a class="nav-link" href="/closeSession">{{usuario}}</a>
-                    {{/if}}   
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{usuario}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Mi perfil</a>
+                                <a class="dropdown-item" href="http://localhost:3000/closeSession">Cerrar Sesion</a> 
+                                </div>
+                                </div>
+                            {{/if}}   
+                         {{#if admin}}
+                         <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{admin}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Mi perfil</a>
+                                <a class="dropdown-item" href="http://localhost:3000/closeSession">Cerrar Sesion</a> 
+                                <div class="dropdown-divider"></div>
+                                <form action="/admin" method="post">
+                                <button class="btn btn-primary" type="submit">Administracion</button>
+                                </form>
+                                {{/if}}  
                    </nav>
                </div>
                <div class="col-3">
@@ -87,7 +110,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav">
-                <a class="nav-link head" href="#destinos">Destinos</a>
+                        <a class="nav-link head" href="#destinos">Destinos</a>
                        <a class="nav-link head" href="#quienessomos">Quienes somos</a>
                        <a class="nav-link head" href="#dondeestamos">Donde estamos</a>
                        </ul>

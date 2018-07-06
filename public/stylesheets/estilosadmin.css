@@ -12,3 +12,13 @@ background: -ms-linear-gradient(left, rgba(40,69,123,1) 0%, rgba(35,57,108,0.82)
 background: linear-gradient(to right, rgba(40,69,123,1) 0%, rgba(35,57,108,0.82) 33%, rgba(35,57,108,0.69) 57%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28457b', endColorstr='#23396c', GradientType=1 );
 }
+
+.imgAdmin:hover{
+    background-size:cover;
+
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    opacity: 0.9;
+}
+

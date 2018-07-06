@@ -19,6 +19,7 @@ var closeSessionRouter = require('./routes/closeSession');
 var adminRouter = require('./routes/admin');
 
 
+
 var ExpressSession = require('express-session');
 
 const Logger = require('./configuration/Winston');
@@ -53,6 +54,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('components',express.static(path.join(`${__dirname}/public/components`)));
+/*
+let env = process.env.NODE_ENV;
+switch(env){
+  case 'development':
+    console.log('Has entrado en modo desarollo');
+    break;
+  case 'production':
+    console.log('Has entrado en modo produccion');
+    break;
+  default:
+  console.log('No has introducido un entorno de ejecucion');
+  process.exit(1);
+}*/
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -64,6 +78,7 @@ app.use('/activate', activateRouter);
 app.use('/cambio', cambioRouter);
 app.use('/closeSession', closeSessionRouter)
 app.use('/admin', adminRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

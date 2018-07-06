@@ -47,3 +47,23 @@ var miFunc = function(){
 $('.userCorrecto').change(miFunc());
 
 
+$("input[type='checkbox']").change(function(e) {
+  console.log(e.target.id)
+  var id = e.target.id;
+  window.location="http://localhost:3000/admin/modificar/"+id;
+});
+
+
+
+function eliminaFila(id){
+  window.location="http://localhost:3000/admin/elim/"+id;
+}
+
+$('.dropdown-toggle').dropdown()
+
+function miPopUpEdit(id, travel){
+  $('.travel').append(`<p>${travel}</p>`);
+}
+
+
+

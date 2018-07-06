@@ -1,0 +1,29 @@
+<h1>Modifica Viajes Existentes bro</h1>
+<h2>Busqueda por id</h2>
+<form class="needs-validation" enctype="multipart/form-data" method="post" role="form" action="modificar/viajes" novalidate>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom01">Introduce id de viaje</label>
+      <input type="text" class="form-control" id="validationCustom01" name="id" placeholder="Id viaje" required></div>
+    <div class="col-md-4 mb-3">
+      <label>Travel</label>
+      <input type="text" class="form-control" name="travel" placeholder="Ciudad">
+    </div>
+    <div class="col-md-4 mb-3">
+      <label>Precio</label>
+        <input type="text" class="form-control" name="price" placeholder="Precio">
+    </div>
+     <div class="col-md-4 mb-3">
+      <label>Descuento</label>
+        <input type="text" class="form-control" name="ahorro" placeholder="Descuento">
+      </div>
+       <div class="col-md-4 mb-3">
+            <label for="exampleInputPassword2">Fotografia</label>         
+            <input type="file" name="file" id="exampleInputPassword2" class="form-control" required>
+        </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Submit form</button>
+
+</form>

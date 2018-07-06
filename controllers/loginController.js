@@ -26,7 +26,14 @@ class loginController extends controller{
                 userModel.isActive(username, (info2)=>{
                    if(info2[0].active===1){
                        this.req.session.user = username;
-                    this.res.render('index', {title: 'Pagina Principal', layout:'layout', usuario:username});
+                       console.log('estoy arriba del admin '+info2)
+                       if(info[0].admin===1){
+                           console.log('he entrado en el if del admin')
+                        this.req.session.user = null;
+                        this.req.session.admin = username;
+                       }
+                    //this.res.render('index', {title: 'Pagina Principal', layout:'layout', usuario:username});
+                    this.res.redirect('/');
                    } else{
                         this.req.flash('info', 'Usuario no activo');
                         this.index();
