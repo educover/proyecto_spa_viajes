@@ -83,7 +83,7 @@ class registroController extends controller {
             .then((resultado) => {
                 console.log(resultado);
               
-                userModel.registroUser(username, pass, email,hash, (info) => {
+                userModel.registroUser(username.toLowerCase(), pass, email,hash, (info) => {
                     console.log('Usuario insertado correctamente'+info);
                     userModel.findUser(username, (info2)=>{
                         console.log(info2);

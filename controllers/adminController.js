@@ -9,14 +9,17 @@ class adminController extends controller{
     modificaViajes(){
         let id = this.req.body.id;
         let travel = this.req.body.travel;
-        let price = this.req.body.price;
+        let price = this.req.body.precio;
         let ahorro = this.req.body.ahorro;
-        let file = this.req.file;
+        let file1 = this.req.body.file;
+        //let file = this.req.file;
+        let file = file1.slice(12);
+        console.log(file)
         let dest = '/img/';
-        let url = dest+file.filename;
-        console.log(id + ' '+ travel+' '+ price+ ' '+ url+ ' '+ahorro)
+        let url = dest+file;
+        console.log(id + ' '+ travel+' '+ price+  ' '+ahorro)
         console.log(typeof(id))
-        console.log(typeof(url))
+        //console.log(typeof(url))
         let adminModel = new AdminModel();
         if(travel!==''){
             adminModel.modifyTravelName(id, travel, (info)=>{
@@ -33,7 +36,7 @@ class adminController extends controller{
                 console.log(info)
             })
         }
-        if(url!==''){
+        if(url!=='/img/'){
             adminModel.modifyTravelUrl(id, url, (info)=>{
                 console.log(info)
             })
@@ -57,6 +60,7 @@ class adminController extends controller{
 
     busquedaDeId(id){
         let adminModel = new AdminModel();
+        
         adminModel.searchId(id, (info)=>{
             console.log(typeof(info[0].active));
             //let info2 = !(info);
@@ -76,7 +80,7 @@ class adminController extends controller{
 
     eliminaPorId(id){
         let adminModel = new AdminModel();
-        adminModel.deleteId(id, (info)=>{
+        adminModel.deleteIdTravel(id, (info)=>{
             console.log(info);
         })
         this.res.redirect('/admin');

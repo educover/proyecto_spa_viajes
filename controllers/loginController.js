@@ -2,13 +2,14 @@ var controller = require('./controller');
 const UserModel = require('../models/users');
 let IdentificationService = require('../service/identificationService');
 var SecureService = require('../service/secureService');
+let EmailService = require('../service/emailService');
 
 class loginController extends controller{
     constructor(req, res, next){
         super(req, res, next);
     }
     login(){
-        let username = this.req.body.user;
+        let username = this.req.body.user.toLowerCase();
         let pass1 = this.req.body.pass;
         let userModel = new UserModel();
         userModel.findUser(username, (info)=>{
@@ -26,11 +27,13 @@ class loginController extends controller{
                 userModel.isActive(username, (info2)=>{
                    if(info2[0].active===1){
                        this.req.session.user = username;
+                       this.req.session.save();
                        console.log('estoy arriba del admin '+info2)
                        if(info[0].admin===1){
                            console.log('he entrado en el if del admin')
                         this.req.session.user = null;
                         this.req.session.admin = username;
+                        this.req.session.save();
                        }
                     //this.res.render('index', {title: 'Pagina Principal', layout:'layout', usuario:username});
                     this.res.redirect('/');
@@ -76,8 +79,8 @@ class loginController extends controller{
                     console.log(info);
                 });
                 let template = 'email';
-                userModel.envioMail(info[0].email, hash, template);
-                this.req.session.user = info[0].username;
+                EmailService.envioMail(info[0].email, hash, template);
+                //this.req.session.user = info[0].username;
             }
 
         })

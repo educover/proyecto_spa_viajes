@@ -58,8 +58,8 @@ class AdminModel{
 
     addTravel(travel, price, ahorro, url, cb){
         if(!conn) return cb('No se ha podido crear la conexion');
-        const SQL =  `INSERT INTO travels(travel, price, ahorro, urlfoto) 
-        VALUES ('${travel}','${price}','${ahorro}', '${url}');`;
+        const SQL =  `INSERT INTO travels(id, travel,active, price, ahorro, urlfoto) 
+        VALUES ('DEFAULT','${travel}','DEFAULT','${price}','${ahorro}', '${url}');`;
         conn.query(SQL, (error, rows)=>{
             if(error) return cb(error)
             else return cb(rows);
@@ -84,13 +84,58 @@ class AdminModel{
             })
     }
 
-    deleteId(id, cb){
+    deleteIdTravel(id, cb){
         if(!conn) return cb("no se ha podido crear la conexion");
         const SQL = `DELETE FROM travels WHERE id='${id}';`;
         conn.query(SQL, (error, rows)=>{
             if(error) return cb(error);
             else return cb(rows);
             }) 
+    }
+
+    deleteIdUsers(id, cb){
+        if(!conn) return cb("no se ha podido crear la conexion");
+        const SQL = `DELETE FROM users WHERE id='${id}';`;
+        conn.query(SQL, (error, rows)=>{
+            if(error) return cb(error);
+            else return cb(rows);
+            }) 
+    }
+
+    selectActive(id, cb){
+        if(!conn) return cb("no se ha podido crear la conexion");
+        const SQL = `SELECT active FROM users where id = '${id}';`;
+        conn.query(SQL, (error, rows)=>{
+            if(error) return cb(error);
+            else return cb(rows);
+            })
+    }
+
+    changeActiveUsers(id, ac, cb){
+        if(!conn) return cb("no se ha podido crear la conexion");
+        const SQL = `UPDATE users set active='${ac}' where id='${id}';`;
+        conn.query(SQL, (error, rows)=>{
+            if(error) return cb(error);
+            else return cb(rows);
+            })
+    }
+
+    selectAdmin(id, cb){
+        if(!conn) return cb("no se ha podido crear la conexion");
+        const SQL = `SELECT admin FROM users where id = '${id}';`;
+        conn.query(SQL, (error, rows)=>{
+            if(error) return cb(error);
+            else return cb(rows);
+            })
+    }
+
+    changeAdminUsers(id, ad, cb){
+        if(!conn) return cb("no se ha podido crear la conexion");
+        const SQL = `UPDATE users set admin='${ad}' where id='${id}';`;
+        conn.query(SQL, (error, rows)=>{
+            if(error) return cb(error);
+            else return cb(rows);
+            })
     }
     
 }

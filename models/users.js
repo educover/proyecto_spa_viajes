@@ -23,6 +23,15 @@ class UserModel{
             else return cb(rows)
             })
     }
+
+    findUserById(id, cb){
+        if(!conn) return cb("no se ha podido crear la conexion");
+        const SQL = "SELECT * FROM users where id LIKE'%"+id+"%';";
+        conn.query(SQL, (error, rows)=>{
+            if(error) return cb(error);
+            else return cb(rows)
+            })
+    }
     
 
     findMail(mail, cb){
@@ -131,7 +140,24 @@ eliminaHash(hash, cb){
             else return cb(rows)
             })
     }
+    
+    activateUser(id, cb){
+        if(!conn) return cb("no se ha podido crear la conexion");
+        const SQL = `UPDATE users set active='1' where id='${id}';`;
+        conn.query(SQL, (error, rows)=>{
+            if(error) return cb(error);
+            else return cb(rows)
+            })
+    }
 
+    desactivateUser(id, cb){
+        if(!conn) return cb("no se ha podido crear la conexion");
+        const SQL = `UPDATE users set active='0' where id='${id}';`;
+        conn.query(SQL, (error, rows)=>{
+            if(error) return cb(error);
+            else return cb(rows)
+            })
+    }
 }
 
 

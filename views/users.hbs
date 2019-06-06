@@ -1,8 +1,8 @@
-    <div class="row">
+<div class="row">
         <div class="col-12">
              <div class="botAdmin">
             <b>Bienvenido al area de administracion</b><br/>
-            Desde aqui podras crear viajes o gestionar ya existentes.
+            Desde aqui podras crear usuarios o gestionar ya existentes.
             </div>
         </div>
     </div>
@@ -14,96 +14,57 @@
                 <thead>
                      <tr>
       <th scope="col">ID</th>
-      <th scope="col">Travel</th>
+      <th scope="col">Usuario</th>
       <th scope="col">Active</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Ahorro</th>
-      <th scope="col">URL foto</th>
+      <th scope="col">Email</th>
+      <th scope="col">Administrador</th>
+    
       
     </tr>
   </thead>
   <tbody>
     
-    {{#each travels}}
+    {{#each users}}
     <tr>
       <th scope="row">{{id}}</th>
-      <td>{{travel}}</td>
+      <td>{{username}}</td>
       <td>  <div class="input-group-prepend">
             <div class="input-group-text">
-            <input type="checkbox" class="miCheckBox" id="{{id}}" {{#if active}} checked {{/if}}aria-label="Checkbox for following text input">
+            <input type="checkbox" class="miCheckActive" id="{{id}}" {{#if active}} checked {{/if}}aria-label="Checkbox for following text input">
             </div>
             </div>
       </td>
-      <td>{{price}}</td>
-      <td>{{ahorro}}</td>
-      <td><img class="imgAdmin" src="{{urlfoto}}">
-      </td>
-      <td>
-            <i onclick="eliminaFila({{id}})" class="fas fa-trash-alt"></i>   
-      </td>
-      <td>
-        <div>
-             <button type="submit" onclick="miFunction({{id}})" name="miPopUp19" id="{{id}}" class="btn btn-primary" data-toggle="modal" data-target="#recuperarContraseña">
-            <i class="far fa-edit"></i></div>
-            </button>
-             
+      <td>{{email}}</td>
+      <td><div class="input-group-prepend">
+            <div class="input-group-text">
+            <input type="checkbox" class="miCheckBoxAdmin" name="{{id}}" {{#if admin}} checked {{/if}}aria-label="Checkbox for following text input">
             </div>
-        
-        
+            </div>
+        </td>
+        <td>
+            <i onclick="eliminaUsuario({{id}})" class="fas fa-trash-alt"></i>   
+        </td>
+        <td>
+            <i onclick="enviaMail({{email}})" class="far fa-envelope"></i>
         </td>
     </tr>
     {{/each}}
 
-    <div class="modal fade" id="recuperarContraseña" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-               <div class="modal-dialog" role="document">
-                   <div class="modal-content">
-                       
-                           <div class="modal-header">
-                               <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-unlock-alt"></i> 
-                               <div class="traveling">Modificar viaje:<span class="idTravel"></span></div>
-                               </h5>
-                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                   <span aria-hidden="true">&times;</span>
-                               </button>
-                           </div>
-                           <div class="modal-body">
-    <form class="needs-validation" enctype="multipart/form-data" role="form">
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label>Travel</label>
-      <input type="text" class="form-control" name="travel" placeholder="Ciudad">
-    </div>
-    <div class="col-md-4 mb-3">
-      <label>Precio</label>
-        <input type="text" class="form-control" name="price" placeholder="Precio">
-    </div>
-     <div class="col-md-4 mb-3">
-      <label>Descuento</label>
-        <input type="text" class="form-control" name="ahorro" placeholder="Descuento">
-      </div>
-            <label>Fotografia</label>         
-            <input type="file" name="file"  class="form-control">
-    </div>
-  </div>
-<div class="form-row">
-    <div class="col-md-4 mb-3">
-  <button name="submit1" class="btn btn-primary" type="submit" onclick="modificar()">Modificar!</button>
-  </div>
-</div>
-</form>
-                           </div>
-                   </div>
-               </div>
-           </div>
+    
    
   </tbody>
 </table>
 </div>
 <div class="col-3">
-
-</div>
+    <div class="mailer"></div>
+    <textarea rows="4" cols="30" type="text" class="text-hidden"></textarea>
+    </div>
         </div>
     </div>
+
+    
+
+
     <nav arial-label="Page navigation example">
         <ul class="pagination">
             {{#with paginate}}

@@ -43,7 +43,8 @@
 
 /*ESTILOS DESTINOS*/
 .cards{
-  min-height: 10vh;
+  min-height: 400px;
+  min-width: 350px;
 }
 .texto-izq{
   height:40px;

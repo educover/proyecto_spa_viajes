@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row divAdmin">
+        <div class="col-3 pp">
+             <div class="botAdmin">
+                    <img class="logo" src="/img/iconoweb.png" alt="icono web"><br/>
+                   
+                    <b>GeeksHubs<br/>Travels</b>
+                    </div>
+        </div>
+        <div class="col-6">
+            <nav class="nav justify-content-center">
+                       <a class="nav-link head" href="/">Index</a>
+                       <a class="nav-link head" href="/admin">Administrar viajes</a>
+                       <a class="nav-link head" href="/admin/users">Administrar usuarios</a>
+            </nav>
+        </div>
+        <div class="col-3">
+            {{#if admin}}
+                    <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{admin}}
+                            </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                 <a class="dropdown-item" href="#">Mi perfil</a>
+                <a class="dropdown-item" href="http://localhost:3000/closeSession">Cerrar Sesion</a>  
+                </div>
+                   </div>             
+            {{/if}}  
+        </div>
+    </div>
+    </div>
+    

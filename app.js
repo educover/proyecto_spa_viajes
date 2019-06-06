@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var flash = require('connect-flash');
+var paginate = require('express-paginate');
+var i18n = require('i18n');
 
 var hbs=require('hbs');
 var hbsUtils = require('hbs-utils')(hbs);
@@ -17,6 +19,8 @@ var activateRouter = require('./routes/activate');
 var cambioRouter = require('./routes/cambio');
 var closeSessionRouter = require('./routes/closeSession');
 var adminRouter = require('./routes/admin');
+var apiRouter = require('./routes/api');
+var i18n_routes = require('./routes/i18n-routes');
 
 
 
@@ -28,6 +32,13 @@ const hbsemail = require('nodemailer-express-handlebars');
 
 
 var app = express();
+i18n.configure({
+  locales:['es', 'en'],
+  cookie:'secret-lang',
+  directory:__dirname+'/locales',
+  defaultLocales:'en'
+})
+app.use(paginate.middleware(2,20));
 
 //view engine partials
 hbsUtils.registerPartials(`${__dirname}/views/partials`);
@@ -36,6 +47,16 @@ hbsUtils.registerWatchedPartials(`${__dirname}/views/partials`);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+app.get('/locale/:lang', (req, res, next)=>{
+  res.cookie('secret-lang', req.params.lang);
+  i18n.setLocale(req.params.lang)
+  res.redirect('/i18n-routes');
+});
+
+app.use(i18n.init);
+
+require('./helpers/hbs')(hbs);
 
 app.use(ExpressSession({
   secret:'GeekshubsAcademy',
@@ -78,6 +99,8 @@ app.use('/activate', activateRouter);
 app.use('/cambio', cambioRouter);
 app.use('/closeSession', closeSessionRouter)
 app.use('/admin', adminRouter);
+app.use('/api', apiRouter);
+app.use('/i18n-routes', i18n_routes);
 
 
 // catch 404 and forward to error handler

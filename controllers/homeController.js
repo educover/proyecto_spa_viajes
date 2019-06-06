@@ -6,7 +6,6 @@ class homeController extends controller{
         super(req, res, next)
         this.user = req.session.user;
         this.admin = req.session.admin;
-        
     }
 
     
