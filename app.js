@@ -18,7 +18,7 @@ var regenerationRouter = require('./routes/regeneration');
 var activateRouter = require('./routes/activate');
 var cambioRouter = require('./routes/cambio');
 var closeSessionRouter = require('./routes/closeSession');
-var adminRouter = require('./routes/admin');
+var admin  = require('./routes/admin');
 var apiRouter = require('./routes/api');
 var i18n_routes = require('./routes/i18n-routes');
 

@@ -8,7 +8,7 @@ const config = {
         },
         gmail:{
             user:'alcover.edu@gmail.com',
-            pass:'670951536Edu.'
+            pass:'*****'
         }
     }, 
     production:{
